@@ -1,0 +1,10 @@
+# Ignore the sandbox folder
+venv/
+.venv/
+
+# Ignore the secret safe! NEVER let this get uploaded.
+.env
+
+# Ignore system files
+__pycache__/
+.DS_Store
