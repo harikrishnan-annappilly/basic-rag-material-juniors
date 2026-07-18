@@ -6,3 +6,5 @@ chromadb
 pypdf
 fastapi
 uvicorn
+langchain-huggingface
+sentence-transformers
