@@ -8,3 +8,6 @@ venv/
 # Ignore system files
 __pycache__/
 .DS_Store
+
+# Unwanted files
+*.pdf
