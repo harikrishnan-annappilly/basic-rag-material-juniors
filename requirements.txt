@@ -9,3 +9,4 @@ uvicorn
 langchain-huggingface
 sentence-transformers
 langchain-chroma
+langchain-ollama
