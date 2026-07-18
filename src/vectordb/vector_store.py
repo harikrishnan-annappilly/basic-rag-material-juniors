@@ -5,6 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")
 
 from langchain_chroma import Chroma
 from src.embeddings.embedder import get_embedder
+from src.utils.helpers import load_config
 
 
 def create_vector_store(chunks):
@@ -12,8 +13,9 @@ def create_vector_store(chunks):
     This function takes the chunks, creates vectors for all of them.
     Then stores them in local chroma db
     """
+    config = load_config()
     my_embedder = get_embedder()
-    presistent_directory = "./chroma_db"
+    presistent_directory = config["db_name"]
     print(f"Storing {len(chunks)} chunks in to Vector DB")
 
     vectore_store = Chroma.from_documents(

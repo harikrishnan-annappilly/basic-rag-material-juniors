@@ -5,14 +5,16 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")
 
 from langchain_chroma import Chroma
 from src.embeddings.embedder import get_embedder
+from src.utils.helpers import load_config
 
 
 def load_existing_db():
     """
     Loads our previously saved database from the folder
     """
+    config = load_config()
     my_embedder = get_embedder()
-    persistent_directory = "./chroma_db"
+    persistent_directory = config["db_name"]
 
     print("Loading exiting vector database")
 
