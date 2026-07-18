@@ -11,3 +11,4 @@ __pycache__/
 
 # Unwanted files
 *.pdf
+chroma_db/
