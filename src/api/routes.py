@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import sys
 import os
@@ -25,8 +25,15 @@ def ask_assistant(request: QueryRequest):
     """
     print(f"\n🌐 API Received a question: '{request.question}'")
 
-    # We hand the question to our master chef (the function from Day 10)
-    final_answer = run_rag_pipeline(request.question)
+    if not request.question or request.question.strip() == "":
+        raise HTTPException(status_code=400, detail="You can not ask empty question.")
 
-    # We return the answer wrapped in a clean JSON format
-    return {"question_asked": request.question, "assistant_answer": final_answer}
+    try:
+        # We hand the question to our master chef (the function from Day 10)
+        final_answer = run_rag_pipeline(request.question)
+
+        # We return the answer wrapped in a clean JSON format
+        return {"question_asked": request.question, "assistant_answer": final_answer}
+    except Exception as ex:
+        print(f"CRITICAL ERROR {str(ex)}")
+        raise HTTPException(status_code=500, detail="AI assitant currently unavailable or encoutered an error")
