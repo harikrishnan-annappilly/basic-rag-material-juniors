@@ -12,3 +12,4 @@ langchain-chroma
 langchain-ollama
 pydantic
 pytest
+reportlab
