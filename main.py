@@ -23,7 +23,8 @@ def run_rag_pipeline(user_question):
     try:
         db = load_existing_db()
         relevant_docs = retrive_info(user_question, db)
-        context_text = "\n\n".join([doc.page_content for doc in relevant_docs])
+        page_contents = [doc.page_content for doc in relevant_docs]
+        context_text = "\n\n".join(page_contents)
         logging.info("Successfully retrieved relevant context from vector database")
 
         prompt_template = get_template()
@@ -32,7 +33,7 @@ def run_rag_pipeline(user_question):
         print("Thinking...")
         response = llm.invoke(formatted_prompt)
         logging.info("Successfully generated response form llm")
-        return response.content
+        return response.content, page_contents
     except Exception as ex:
         error_msg = f"Something went wrong: {ex}"
         logging.error(error_msg)

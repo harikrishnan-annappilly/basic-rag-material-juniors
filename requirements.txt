@@ -1,3 +1,4 @@
+deepeval
 langchain
 langchain-community
 langchain-text-splitters
