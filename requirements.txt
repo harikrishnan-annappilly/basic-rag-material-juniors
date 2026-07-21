@@ -16,3 +16,4 @@ pytest
 reportlab
 langchain-experimental
 psycopg[binary]
+langchain-postgres
