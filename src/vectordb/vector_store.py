@@ -1,5 +1,6 @@
 import os
 import sys
+import shutil
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
@@ -16,6 +17,8 @@ def create_vector_store(chunks):
     config = load_config()
     my_embedder = get_embedder()
     presistent_directory = config["db_name"]
+    print(f"Deleting existing DB")
+    shutil.rmtree(presistent_directory)
     print(f"Storing {len(chunks)} chunks in to Vector DB")
 
     vectore_store = Chroma.from_documents(

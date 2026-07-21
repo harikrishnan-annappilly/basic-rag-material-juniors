@@ -1,7 +1,6 @@
 import sys
 import os
-from langchain_experimental.text_splitter import SemanticChunker
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # Adding the parent directory to the path so we can import from ingestion
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
@@ -15,11 +14,8 @@ def split_text_into_chunks(extracted_pages):
     into smaller, overlapping chunks.
     """
     config = load_config()
-    embeddings = HuggingFaceEmbeddings(model_name=config["model_name"])
-    text_splitter = SemanticChunker(
-        embeddings=embeddings,
-        breakpoint_threshold_type="percentile",
-        breakpoint_threshold_amount=80,
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=config["chunk_size"], chunk_overlap=config["chunk_overlap"]
     )
     chunks = text_splitter.split_documents(extracted_pages)
     return chunks

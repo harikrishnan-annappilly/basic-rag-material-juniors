@@ -14,3 +14,4 @@ langchain-ollama
 pydantic
 pytest
 reportlab
+langchain-experimental
