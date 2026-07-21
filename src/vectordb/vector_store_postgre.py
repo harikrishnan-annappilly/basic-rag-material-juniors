@@ -62,6 +62,8 @@ def run_enterprise_ingestion():
 
     # 7. LangChain handles converting text -> vector -> SQL insert automatically!
     pages = load_document("sample.pdf")
+    for page in pages:
+        page.metadata.update({"source": "sample_pdf", "version": "1.0"})
     chunks = split_text_into_chunks(pages)
     print(f"Adding {len(chunks)} to the DB")
     store.add_documents(chunks)
